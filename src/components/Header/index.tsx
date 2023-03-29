@@ -6,10 +6,6 @@ export function Header() {
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <img className={styles.headerLogo} src="/images/tractian-logo.svg" alt="Tractian Logo"/>
-        <nav>
-          <a>Home</a>
-          <a>Posts</a>
-        </nav>
         <Welcome/>
       </div>
     </header>
