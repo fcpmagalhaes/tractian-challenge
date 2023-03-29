@@ -19,7 +19,6 @@ export function Welcome() {
     async function fetchData() {
       try {
         const { data } = await apiGH.get<ProfileResponse>('/fcpmagalhaes');
-        console.log('user', user);
         setUser({
           name: data.name,
           avatar: data.avatar_url,
