@@ -1,22 +1,21 @@
 .layoutHeader {
   padding-left: 16px;
-  background-color: #132494;
+  background-color: var(--blue-300);
 }
 
 .layout {
   height: calc(100vh - 4rem);
   .sider {
-    background-color: #132494;
+    background-color: var(--blue-300);
     .menu {
-      background-color: #132494;
+      background-color: var(--blue-300);
     }
   }
 
 }
 
 .content {
-  margin: 24px 16px;
+  margin: 16px;
   padding: 24;
   min-height: 280;
-  color: black;
 }
