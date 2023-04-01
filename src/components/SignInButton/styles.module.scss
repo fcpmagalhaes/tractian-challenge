@@ -1,0 +1,56 @@
+.signInButton {
+  height: 3rem;
+  border-radius: 3rem;
+  background-color: var(--blue-500);
+  border: 0;
+  padding: 0 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white);
+  font-weight: bold;
+
+  svg {
+    width: 35px;
+    height: 35px;
+    margin-left: 1rem;
+  }
+
+  &:hover {
+    filter: brightness(0.8)
+  }
+
+}
+
+.signOutButton {
+  height: 3rem;
+  border-radius: 3rem;
+  background-color: var(--blue-500);
+  border: 0;
+  padding: 0 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white);
+  font-weight: bold;
+
+  svg.closeIcon {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    &:hover {
+      filter: brightness(1.5)
+    }
+  }
+
+  img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    margin: 0 1rem 0 1rem;
+  }
+}
