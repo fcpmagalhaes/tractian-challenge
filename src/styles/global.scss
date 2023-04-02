@@ -50,4 +50,7 @@ a {
 
 .ant-layout-sider-trigger {
   background-color: var(--blue-300) !important;
+  &:hover {
+    filter: brightness(0.8) !important;
+  }
 }
