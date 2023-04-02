@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { Layout, Menu, theme } from 'antd';
 import {
@@ -36,6 +36,11 @@ export function LayoutContainer({contentPage}: any) {
   const [collapsed, setCollapsed] = useState(false);
   const router = useRouter();
   const { token: { colorBgContainer }} = theme.useToken();
+  const [menuSelected, setMenuSelected] = useState<string[]>();
+
+  useEffect(() => {
+    setMenuSelected([router.pathname.substring(1)]);
+  },[router.pathname]);
  
   return (
     <Layout className={styles.layout}>
@@ -51,7 +56,7 @@ export function LayoutContainer({contentPage}: any) {
           className={styles.menu}
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['assets']}
+          selectedKeys={menuSelected}
           items={primaryMenu}
         />
       </Sider>
