@@ -1,33 +1,30 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { Layout, Menu, theme } from 'antd';
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
+import { MdSensors, MdOutlineFactory } from 'react-icons/md';
+import { GrUserWorker, GrDocumentConfig } from 'react-icons/gr';
 import styles from './styles.module.scss';
 
 const { Sider, Content } = Layout;
 const primaryMenu = [
   {
     key: 'assets',
-    icon: <UploadOutlined />,
+    icon: <MdSensors />,
     label: 'Ativos'
   },
   {
     key: 'workorders',
-    icon: <UserOutlined />,
+    icon: <GrDocumentConfig />,
     label: 'Ordens de Serviço'
   },
   {
     key: 'companies',
-    icon: <VideoCameraOutlined />,
+    icon: <MdOutlineFactory />,
     label: 'Empresas'
   },
   {
     key: 'technicians',
-    icon: <VideoCameraOutlined />,
+    icon: <GrUserWorker />,
     label: 'Técnicos'
   }
 ];
