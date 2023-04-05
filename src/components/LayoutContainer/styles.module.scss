@@ -19,11 +19,16 @@
       }
     }
   }
-
 }
 
 .content {
   margin: 16px;
   padding: 24;
   min-height: 280;
+}
+
+@media screen and (max-width: 500px) {
+  .layout {
+    height: calc(100vh - 8rem);
+  }
 }

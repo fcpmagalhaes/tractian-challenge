@@ -9,13 +9,13 @@ export function SignInButton() {
 
   return userData ? (
     <div className={styles.signOutButton}>
-    <strong>{userData.user?.name}</strong>
-    <img src={userData.user?.image} alt="Foto de perfil"/>
-    <FiX
-      color="#737380"
-      className={styles.closeIcon}
-      onClick={() => signOut()}/>
-  </div>
+      <strong>{userData.user?.name}</strong>
+      <img src={userData.user?.image} alt="Foto de perfil"/>
+      <FiX
+        color="#737380"
+        className={styles.closeIcon}
+        onClick={() => signOut()}/>
+    </div>
   ) : (
     <button
       type="button"
