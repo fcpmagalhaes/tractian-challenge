@@ -4,6 +4,8 @@ import { api } from "@/services/axios/index";
 import { Table } from 'antd';
 import { PageTitle } from "@/components/PageTitle";
 
+import { useSelector, useDispatch } from 'react-redux';
+import { Creators } from '@/store/painel/actions';
 const { Column } = Table;
 
 type Workorders = {
@@ -20,6 +22,7 @@ export default function Workorders() {
   const [loading, setLoading] = useState<boolean>(true);
 
   const router = useRouter();
+  const dispatch = useDispatch();
   
   useEffect(() => {
     async function getTechnicians() {
@@ -28,7 +31,22 @@ export default function Workorders() {
       setLoading(false);
     };
     getTechnicians();
+    
   },[]);
+
+  const { workOrders } = useSelector((state) => {
+    return state.painel;
+  });
+
+  useEffect(() => {
+    dispatch(Creators.loadWorkOrders());
+  }, []);
+
+  useEffect(() => {
+    if(workOrders) {
+      console.log('workOrders', workOrders);
+    }
+  }, [workOrders]);
 
   return (
     <>
