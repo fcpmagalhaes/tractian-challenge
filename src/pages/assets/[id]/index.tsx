@@ -11,11 +11,11 @@ import Link from 'next/link';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import highchartsMore from "highcharts/highcharts-more";
-import solidGauge from "highcharts/modules/solid-gauge";
+// import highchartsMore from "highcharts/highcharts-more";
+// import solidGauge from "highcharts/modules/solid-gauge";
 
-highchartsMore(Highcharts);
-solidGauge(Highcharts);
+// highchartsMore(Highcharts);
+// solidGauge(Highcharts);
 
 type Health = {
   status: string;
@@ -259,7 +259,7 @@ export default function DetailAsset() {
             />
           </Col>
           <Col xs={24} md={12} lg={8}>
-            <HighchartsReact highcharts={Highcharts} options={healthChart} />
+            {/* <HighchartsReact highcharts={Highcharts} options={healthChart} /> */}
           </Col>
         </Row>
         
