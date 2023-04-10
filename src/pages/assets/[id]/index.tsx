@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { api } from "@/services/axios/index";
 import styles from "./styles.module.scss";
+import { setStatusData } from '@/utils/status';
+import { formatDate } from '@/utils/date';
 
 import { Image, Divider, Timeline, Descriptions, Badge, Tag, List, Avatar } from 'antd';
 import Link from 'next/link';
@@ -61,47 +63,7 @@ export default function Asset() {
   async function getTechnician() {
     const response = await api.get<Asset>(`/assets/${id}`);
     setAsset(response.data);
-  };  
-
-  function addZero(num: number){
-    if (num <= 9) 
-        return "0" + num;
-    else
-        return num; 
   };
-
-  function formatDate(date: Date) {
-    return (
-      addZero(date.getDate()).toString() + "/" +
-      addZero(date.getMonth()+1).toString() + "/" + 
-      date.getFullYear());
-  }
-
-  function setStatusData(label: string) {
-    let translatedLabel = '';
-    let colorStatus = '';
-    if (label === 'inOperation') {
-      translatedLabel = 'Em Operação';
-      colorStatus = 'green';
-    }
-    if (label === 'inDowntime') {
-      translatedLabel = 'Em Parada'
-      colorStatus = 'red';
-    }
-    if (label === 'inAlert') {
-      translatedLabel = 'Em Alerta';
-      colorStatus = 'orange';
-    }
-    if (label === 'unplannedStop') {
-      translatedLabel = 'Parada Não Planejada';
-      colorStatus = 'black';
-    }
-    if (label === 'plannedStop') {
-      translatedLabel = 'Parada Planejada';
-      colorStatus = 'blue';
-    }
-    return {translatedLabel, colorStatus};
-  }
 
   function createHealthHistory(healthData: Array<Health>) {
     const healtMapped = healthData.map((item) => {

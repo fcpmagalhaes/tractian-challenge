@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { api } from "@/services/axios/index";
 import { Space, Table, Tag } from 'antd';
 import { PageTitle } from "@/components/PageTitle";
+import { setStatusData } from '@/utils/status';
 
 const { Column, ColumnGroup } = Table;
 
@@ -101,24 +102,13 @@ export default function Assets() {
     getAssets();
   },[]);
 
-  type T = {
+  type Status = {
     statusData: string;
   }
 
-  function RenderTag({ statusData }: T ) {
-    let color = 'success';
-    let description = 'Em Operação';
-
-    if (statusData === 'inAlert') {
-      color = 'warning';
-      description = 'Em Alerta';
-    }
-    if (statusData === 'inDowntime') {
-      color = 'error';
-      description = 'Em Parada';
-    }
-    return <Tag color={color} key={statusData}>{description}</Tag>
-    
+  function RenderTag({ statusData }: Status ) {
+    const {translatedLabel, colorStatus} = setStatusData(statusData);
+    return <Tag color={colorStatus} key={statusData}>{translatedLabel}</Tag>
   }
 
   return (
