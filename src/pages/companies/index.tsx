@@ -28,7 +28,7 @@ export default function Companies() {
 
   return (
     <>
-      <PageTitle title={"Técnicos"}/>
+      <PageTitle title={"Empresas"}/>
         <Table
         dataSource={companies}
         pagination={{ pageSize: 3 }}

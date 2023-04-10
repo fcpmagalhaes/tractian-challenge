@@ -52,7 +52,6 @@ export default function Assets() {
       const response = await api.get<Assets[]>('/assets');
       setAssets(response.data);
       setLoading(false);
-      console.log('response', response);
     };
     getAssets();
   },[]);
