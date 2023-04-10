@@ -17,4 +17,4 @@ export const authOptions = {
     } as GithubAuth),
   ],
 }
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);
