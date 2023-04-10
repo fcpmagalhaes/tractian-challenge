@@ -24,7 +24,9 @@
 .content {
   margin: 16px;
   padding: 24;
-  min-height: 280;
+  // min-height: 280;
+  height: calc(100vh - 4rem);
+
 }
 
 @media screen and (max-width: 500px) {

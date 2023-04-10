@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { Layout, Menu, theme } from 'antd';
-import { MdSensors, MdOutlineFactory } from 'react-icons/md';
+import { MdSensors, MdOutlineFactory, MdArrowBack } from 'react-icons/md';
 import { GrUserWorker, GrDocumentConfig } from 'react-icons/gr';
 import styles from './styles.module.scss';
 
@@ -28,6 +28,13 @@ const primaryMenu = [
     label: 'Técnicos'
   }
 ];
+const backMenu = [
+  {
+    key: 'back',
+    icon: <MdArrowBack />,
+    label: 'Voltar'
+  },
+];
 
 export function LayoutContainer({contentPage}: any) {
   const [collapsed, setCollapsed] = useState(false);
@@ -48,8 +55,16 @@ export function LayoutContainer({contentPage}: any) {
         breakpoint="lg"
         className={styles.sider}
       >
+         <Menu
+          onClick={() => router.back()}
+          className={styles.menu}
+          theme="dark"
+          mode="inline"
+          selectedKeys={[]}
+          items={backMenu}
+        />
         <Menu
-          onClick={({key}) => router.push(`${key}`)}
+          onClick={({key}) => router.push(`/${key}`)}
           className={styles.menu}
           theme="dark"
           mode="inline"
