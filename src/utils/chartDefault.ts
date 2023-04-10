@@ -20,12 +20,12 @@ export const donutChart = {
     },
     valueSuffix: '%',
     pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}</span>',
-    positioner: function(labelWidth: any) {
-      return {
-        x: (this.chart.chartWidth - labelWidth) / 2,
-        y: (this.chart.plotHeight / 2) + 15
-      };
-    }
+    // positioner: function(labelWidth) {
+    //   return {
+    //     x: (this.chart.chartWidth - labelWidth) / 2,
+    //     y: (this.chart.plotHeight / 2) + 15
+    //   };
+    // }
   },
   pane: {
     startAngle: 0,
@@ -53,15 +53,18 @@ export const donutChart = {
       rounded: true
     }
   },
-  series: []
+  series: [{
+    name: 'Nível',
+    data: [{
+      color: '#3498db',
+      radius: '112%',
+      innerRadius: '88%',
+      y: 0,
+    }],
+  }]
 };
-type SeriesBar = {
-  name: string;
-  data: Array<number>;
-  color: string;
-  index: number;
-};
-export const BarChart = {
+
+export const barChart = {
   chart: {
       type: 'bar',
   },
@@ -91,5 +94,18 @@ export const BarChart = {
           stacking: 'normal'
       }
   },
-  series: [],
+  series: [
+    {
+      name: 'Tempo Total de Atividade',
+      data: [0],
+      color: '#6AA5E7',
+      index: 2
+    },
+    {
+      name: 'Tempo Total de Coleta',
+      data: [0],
+      color: '#6C6DE3',
+      index: 0
+    }
+  ]
 }
