@@ -6,10 +6,10 @@ import { setStatusData } from '@/utils/status';
 import { formatDate } from '@/utils/date';
 import { donutChart, BarChart } from '@/utils/chartDefault';
 
-import { Image, Divider, Timeline, Descriptions, Badge, Tag, List, Avatar } from 'antd';
+import { Image, Divider, Timeline, Descriptions, Badge, Tag, List, Avatar, Row, Col } from 'antd';
 import Link from 'next/link';
 
-import Highcharts, { chart } from 'highcharts';
+import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import highchartsMore from "highcharts/highcharts-more";
 import solidGauge from "highcharts/modules/solid-gauge";
@@ -136,75 +136,84 @@ export default function Asset() {
   },[asset]);
 
   
-  return ( 
+  return (
     asset ? (
-      <>
-        <div className={styles.container}>
-          <Image
-            height={200}
-            src={asset.image}
-            fallback="/images/asset-img-error.png"
-            alt="asset image"
-          />
-          <Divider />
-          <HighchartsReact highcharts={Highcharts} options={healthChart} />
-          <Divider />
-          <HighchartsReact highcharts={Highcharts} options={metricChart} />
-          
-          {/* <Divider orientation="center">Presets</Divider> */}
-          <Divider />
+      <div className={styles.container}>
+        <Row justify="space-between" align="middle">
+          <Col xs={24} md={12} lg={8}>
+            <Image
+              height={200}
+              src={asset.image}
+              fallback="/images/asset-img-error.png"
+              alt="asset image"
+            />
+          </Col>
+          <Col xs={24} md={12} lg={8}>
+            <HighchartsReact highcharts={Highcharts} options={healthChart} />
+          </Col>
+        </Row>
+        
+        <Row>
+          <Col xs={24}>
+            <Descriptions title={asset.name} layout="vertical" bordered>
+              <Descriptions.Item label="Modelo">{asset.model}</Descriptions.Item>
+              <Descriptions.Item label="Sensores">
+                {asset.sensors.map((sensor: string, index: number) => <Tag color='processing' key={index}>{sensor}</Tag>)}
+              </Descriptions.Item>
+              <Descriptions.Item label="Status" span={2}>
+                <Badge color={status.colorStatus} text={status.translatedLabel} />
+              </Descriptions.Item>
+              <Descriptions.Item label="Último Tempo de Atividade">{lastUptime}</Descriptions.Item>
+              <Descriptions.Item label="Empresa">{asset.companyId}</Descriptions.Item>
+              <Descriptions.Item label="Unidade">{asset.unitId}</Descriptions.Item>
+              <Descriptions.Item label="Temperatura Máxima">
+                {asset.specifications.maxTemp ? `${asset.specifications.maxTemp}°C`: '-'}
+              </Descriptions.Item>
+              <Descriptions.Item label="Potência">
+                {asset.specifications.power ? `${asset.specifications.power}kWh`: '-'}
+              </Descriptions.Item>
+              <Descriptions.Item label="RPM">
+                {asset.specifications.rpm ? `${asset.specifications.rpm}`: '-'}
+                {asset.specifications.rpm}
+              </Descriptions.Item>
+            </Descriptions>
+          </Col>
+        </Row>
+        
+        <Divider orientation="left">Indicadores</Divider>
+        
+        <Row justify="space-around" align="middle">
+          <Col xs={24} md={8}>
+            <Timeline
+              mode={'left'}
+              items={healthHistory}
+            />
+          </Col>
+          <Col xs={24} md={16}>
+            <HighchartsReact highcharts={Highcharts} options={metricChart} />
+          </Col>
+        </Row>
 
-          <Descriptions title={asset.name} layout="vertical" bordered>
-            <Descriptions.Item label="Modelo">{asset.model}</Descriptions.Item>
-            <Descriptions.Item label="Sensores">
-              {asset.sensors.map((sensor: string, index: number) => <Tag color='processing' key={index}>{sensor}</Tag>)}
-            </Descriptions.Item>
-            <Descriptions.Item label="Status" span={2}>
-              <Badge color={status.colorStatus} text={status.translatedLabel} />
-            </Descriptions.Item>
-            <Descriptions.Item label="Último Tempo de Atividade">{lastUptime}</Descriptions.Item>
-            <Descriptions.Item label="Empresa">{asset.companyId}</Descriptions.Item>
-            <Descriptions.Item label="Unidade">{asset.unitId}</Descriptions.Item>
-            <Descriptions.Item label="Temperatura Máxima">
-              {asset.specifications.maxTemp ? `${asset.specifications.maxTemp}°C`: '-'}
-            </Descriptions.Item>
-            <Descriptions.Item label="Potência">
-              {asset.specifications.power ? `${asset.specifications.power}kWh`: '-'}
-            </Descriptions.Item>
-            <Descriptions.Item label="RPM">
-              {asset.specifications.rpm ? `${asset.specifications.rpm}`: '-'}
-              {asset.specifications.rpm}
-            </Descriptions.Item>
-          </Descriptions>
+        <Divider orientation="left">Técnicos Notificados</Divider>
 
-          <Divider />
-
-          <List
-            header={<h1>Técnicos Notificados</h1>}
-            itemLayout="horizontal"
-            dataSource={asset.assignedUserIds}
-            renderItem={(item, index) => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={<Avatar src={`https://joesch.moe/api/v1/random?key=${index}`} />}
-                  title={<Link href={`/technicians/${item}`}>{item}</Link>}
-                  description={`Email: `}
-                />
-              </List.Item>
-            )}
-          />
-
-          <Divider />
-
-          <Timeline
-            mode={'left'}
-            items={healthHistory}
-          />
-          
-          <Divider />
-
-        </div>
-      </>
+        <Row>
+          <Col xs={24} md={12}>
+            <List
+              itemLayout="horizontal"
+              dataSource={asset.assignedUserIds}
+              renderItem={(item, index) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<Avatar src={`https://joesch.moe/api/v1/random?key=${index}`} />}
+                    title={<Link href={`/technicians/${item}`}>{item}</Link>}
+                    description={`Email: `}
+                  />
+                </List.Item>
+              )}
+            />
+          </Col>
+        </Row>
+      </div>
     ) :
     <h1>Carragando...</h1>
   )
