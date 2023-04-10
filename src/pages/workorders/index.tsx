@@ -34,19 +34,19 @@ export default function Workorders() {
     
   },[]);
 
-  const { workOrders } = useSelector((state) => {
-    return state.painel;
-  });
+  // const { workOrders } = useSelector((state) => {
+  //   return state.painel;
+  // });
 
   useEffect(() => {
     dispatch(Creators.loadWorkOrders());
   }, []);
 
-  useEffect(() => {
-    if(workOrders) {
-      console.log('workOrders', workOrders);
-    }
-  }, [workOrders]);
+  // useEffect(() => {
+  //   if(workOrders) {
+  //     console.log('workOrders', workOrders);
+  //   }
+  // }, [workOrders]);
 
   return (
     <>
