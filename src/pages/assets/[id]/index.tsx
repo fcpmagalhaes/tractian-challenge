@@ -4,7 +4,7 @@ import { api } from "@/services/axios/index";
 import styles from "./styles.module.scss";
 import { setStatusData } from '@/utils/status';
 import { formatDate } from '@/utils/date';
-import { donutChart, BarChart } from '@/utils/chartDefault';
+import { donutChart, barChart } from '@/utils/chartDefault';
 
 import { Image, Divider, Timeline, Descriptions, Badge, Tag, List, Avatar, Row, Col } from 'antd';
 import Link from 'next/link';
@@ -68,7 +68,7 @@ export default function DetailAsset() {
   const [healthHistory, setHealthHistory] = useState<HealthHistory[]>([]);
   const [status, setStatus] = useState<Status>({} as Status);
   const [lastUptime, setLastUptime] = useState('');
-  const [metricChart, setMetricChart] = useState(BarChart);
+  const [metricChart, setMetricChart] = useState(barChart);
   const [healthChart, setHealthChart] = useState(donutChart);
 
   async function getTechnician() {
@@ -100,7 +100,90 @@ export default function DetailAsset() {
       setStatus(setStatusData(asset.status));
       setLastUptime(formatDate(new Date(asset.metrics.lastUptimeAt)));
 
-      const seriesHealth = {
+      // const seriesHealth = [{
+      //   name: 'Nível',
+      //   data: [{
+      //     color: '#3498db',
+      //     radius: '112%',
+      //     innerRadius: '88%',
+      //     y: asset.healthscore,
+      //   }],
+      //   }];
+
+      // const seriesMetrics = {
+      //   series: [
+      //     {
+      //       name: 'Tempo Total de Atividade',
+      //       data: [asset.metrics.totalUptime],
+      //       color: '#6AA5E7',
+      //       index: 2
+      //     },
+      //     {
+      //       name: 'Tempo Total de Coleta',
+      //       data: [asset.metrics.totalCollectsUptime],
+      //       color: '#6C6DE3',
+      //       index: 0
+      //     }
+      //   ]
+      // };
+      
+      // setHealthChart([...healthChart, seriesHealth]);
+      // setMetricChart({...metricChart, seriesMetrics});
+
+      const donut = {
+        chart: {
+          type: 'solidgauge',
+          width: 250,
+          height: 250,
+        },
+        title: {
+          text: 'Saúde',
+          style: {
+            fontSize: '16px'
+          }
+        },
+        tooltip: {
+          borderWidth: 0,
+          backgroundColor: 'none',
+          shadow: false,
+          style: {
+            fontSize: '10px'
+          },
+          valueSuffix: '%',
+          pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}</span>',
+          // positioner: function(labelWidth) {
+          //   return {
+          //     x: (this.chart.chartWidth - labelWidth) / 2,
+          //     y: (this.chart.plotHeight / 2) + 15
+          //   };
+          // }
+        },
+        pane: {
+          startAngle: 0,
+          endAngle: 360,
+          background: [{
+            outerRadius: '112%',
+            innerRadius: '88%',
+            backgroundColor: '#BCDAF1',
+            borderWidth: 0
+          }]
+        },
+        yAxis: {
+          min: 0,
+          max: 100,
+          lineWidth: 0,
+          tickPositions: []
+        },
+        plotOptions: {
+          solidgauge: {
+            dataLabels: {
+              enabled: false
+            },
+            linecap: 'round',
+            stickyTracking: false,
+            rounded: true
+          }
+        },
         series: [{
           name: 'Nível',
           data: [{
@@ -112,7 +195,36 @@ export default function DetailAsset() {
         }]
       };
 
-      const seriesMetrics = {
+      const bar = {
+        chart: {
+            type: 'bar',
+        },
+        title: {
+          text: 'Métricas',
+          style: {
+            fontSize: '16px'
+          }
+        },
+        xAxis: {
+            categories: ['Horas']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: ''
+            }
+        },
+        credits: {
+          enabled: false
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
         series: [
           {
             name: 'Tempo Total de Atividade',
@@ -127,11 +239,9 @@ export default function DetailAsset() {
             index: 0
           }
         ]
-      };
-      
-      setHealthChart({...healthChart, ...seriesHealth});
-      setMetricChart({...metricChart, ...seriesMetrics});
-
+      }
+      setHealthChart(donut);
+      setMetricChart(bar);
     }
   },[asset]);
 
