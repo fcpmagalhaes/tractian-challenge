@@ -10,7 +10,7 @@ type User = {
   unitId: number;
 };
 
-export default function Tech() {
+export default function DetailTechnician() {
   const router = useRouter();
   const { id }  = router.query;
 
@@ -26,15 +26,23 @@ export default function Tech() {
 
   function UserData() {
     if (user) {
-      return <div>
+      return <div style={{padding: '1rem'}}>
         <h1>Id</h1>
         <span>{user.id}</span>
+        <br/>
+        <br/>
         <h1>Nome</h1>
         <span>{user.name}</span>
+        <br/>
+        <br/>
         <h1>Email</h1>
         <span>{user.email}</span>
+        <br/>
+        <br/>
         <h1>Empresa</h1>
         <span>{user.companyId}</span>
+        <br/>
+        <br/>
         <h1>Unidade</h1>
         <span>{user.unitId}</span>
       </div>

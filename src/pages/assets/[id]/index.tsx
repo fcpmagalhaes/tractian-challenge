@@ -60,7 +60,7 @@ type Status = {
   colorStatus: string;
 }
 
-export default function Asset() {
+export default function DetailAsset() {
   const router = useRouter();
   const { id }  = router.query;
   
