@@ -1,21 +1,18 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
+import painel from './painel/reducer';
 
-import infographic from './managementPanel/reducer';
 
 const reducers = combineReducers({
-  infographic
+  painel
 });
 
 const sagaMiddleware = createSagaMiddleware();
-
-const composeEnhancers = 
-  (typeof window !== 'undefined'
-    && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || 
-  compose;
-
-  
+  const composeEnhancers =
+    (typeof window !== 'undefined'
+      && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+      compose;
 
   const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
 

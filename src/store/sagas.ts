@@ -1,9 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
-import { managementPanelSagas } from './managementPanel/sagas';
+import { painelSagas } from './painel/sagas';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function* () {
-  yield all([
-    fork(managementPanelSagas),
-  ]);
+  yield all([fork(painelSagas)]);
 }
