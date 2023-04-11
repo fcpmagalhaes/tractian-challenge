@@ -47,7 +47,7 @@ export function LayoutContainer({contentPage}: any) {
   },[router.pathname]);
  
   return (
-    <Layout className={styles.layout}>
+    <Layout className={styles.layout} hasSider>
       <Sider 
         collapsible 
         collapsed={collapsed} 
@@ -73,7 +73,7 @@ export function LayoutContainer({contentPage}: any) {
         />
       </Sider>
 
-      <Layout>
+      <Layout className={styles.siteLayout}>
         <Content
           className={styles.content}
           style={{ background: colorBgContainer}}
