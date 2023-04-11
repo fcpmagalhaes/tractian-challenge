@@ -69,7 +69,6 @@ export const barChart = {
       type: 'bar',
   },
   title: {
-    text: 'Métricas',
     style: {
       fontSize: '16px'
     }

@@ -209,7 +209,6 @@ export default function DetailAsset() {
             type: 'bar',
         },
         title: {
-          text: 'Métricas',
           style: {
             fontSize: '16px'
           }
