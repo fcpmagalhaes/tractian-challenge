@@ -16,5 +16,6 @@ export const authOptions = {
       scope: 'read:user'
     } as GithubAuth),
   ],
+  secret: process.env.NEXT_PUBLIC_SECRET,
 }
 export default NextAuth(authOptions);
