@@ -67,7 +67,7 @@ export default function Assets() {
 
   return (
     <>
-      <PageTitle title={"Ativos"}/>
+      <PageTitle title={"Bens"}/>
         <Table
         dataSource={assets}
         pagination={{ pageSize: 3 }}

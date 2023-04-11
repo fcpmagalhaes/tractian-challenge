@@ -10,7 +10,7 @@ const primaryMenu = [
   {
     key: 'assets',
     icon: <MdSensors />,
-    label: 'Ativos'
+    label: 'Bens'
   },
   {
     key: 'workorders',
