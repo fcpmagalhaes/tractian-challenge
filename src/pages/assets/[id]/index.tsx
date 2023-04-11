@@ -11,11 +11,20 @@ import Link from 'next/link';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-// import highchartsMore from "highcharts/highcharts-more";
-// import solidGauge from "highcharts/modules/solid-gauge";
+// import HighchartsExporting from 'highcharts/modules/exporting';
+import highchartsMore from "highcharts/highcharts-more";
+// import HC_more from 'highcharts/highcharts-more';
+import solidGauge from "highcharts/modules/solid-gauge";
 
 // highchartsMore(Highcharts);
+// highchartsMore(Highcharts);
 // solidGauge(Highcharts);
+
+// if (typeof Highcharts === 'object') {
+//   HighchartsExporting(Highcharts);
+//   HC_more(Highcharts);
+//   solidGauge(Highcharts);
+// };
 
 type Health = {
   status: string;
@@ -71,7 +80,7 @@ export default function DetailAsset() {
   const [metricChart, setMetricChart] = useState(barChart);
   const [healthChart, setHealthChart] = useState(donutChart);
 
-  async function getTechnician() {
+  async function getAssets() {
     const response = await api.get<Asset>(`/assets/${id}`);
     setAsset(response.data);
   };
@@ -91,7 +100,9 @@ export default function DetailAsset() {
   }
 
   useEffect(() => {
-    getTechnician();
+    highchartsMore(Highcharts);
+    solidGauge(Highcharts);
+    getAssets();
   },[]);
 
   useEffect(() => {
@@ -259,7 +270,7 @@ export default function DetailAsset() {
             />
           </Col>
           <Col xs={24} md={12} lg={8}>
-            {/* <HighchartsReact highcharts={Highcharts} options={healthChart} /> */}
+            <HighchartsReact highcharts={Highcharts} options={healthChart} />
           </Col>
         </Row>
         
