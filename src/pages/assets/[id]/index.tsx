@@ -1,30 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { api } from "@/services/axios/index";
-import styles from "./styles.module.scss";
+import { 
+  Image, 
+  Divider, 
+  Timeline,
+  Descriptions,
+  Badge,
+  Tag,
+  List,
+  Avatar,
+  Row,
+  Col
+} from 'antd';
 import { setStatusData } from '@/utils/status';
 import { formatDate } from '@/utils/date';
 import { donutChart, barChart } from '@/utils/chartDefault';
-
-import { Image, Divider, Timeline, Descriptions, Badge, Tag, List, Avatar, Row, Col } from 'antd';
-import Link from 'next/link';
-
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-// import HighchartsExporting from 'highcharts/modules/exporting';
 import highchartsMore from "highcharts/highcharts-more";
-// import HC_more from 'highcharts/highcharts-more';
 import solidGauge from "highcharts/modules/solid-gauge";
+import styles from "./styles.module.scss";
 
-// highchartsMore(Highcharts);
-// highchartsMore(Highcharts);
-// solidGauge(Highcharts);
-
-// if (typeof Highcharts === 'object') {
-//   HighchartsExporting(Highcharts);
-//   HC_more(Highcharts);
-//   solidGauge(Highcharts);
-// };
 
 type Health = {
   status: string;
