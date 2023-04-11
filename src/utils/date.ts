@@ -11,6 +11,6 @@ export function formatDate(date: Date) {
     addZero(date.getMonth()+1).toString() + "/" + 
     date.getFullYear() + "\t" +
     addZero(date.getHours()) + "h" +
-    addZero(date.getMinutes()) + "min"
+    addZero(date.getMinutes())
   );
 }
