@@ -20,12 +20,12 @@ export const donutChart = {
     },
     valueSuffix: '%',
     pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}</span>',
-    // positioner: function(labelWidth) {
-    //   return {
-    //     x: (this.chart.chartWidth - labelWidth) / 2,
-    //     y: (this.chart.plotHeight / 2) + 15
-    //   };
-    // }
+    positioner: function(this: any, labelWidth: number) {
+      return {
+        x: (this.chart.chartWidth - labelWidth) / 2,
+        y: (this.chart.plotHeight / 2) + 15
+      };
+    }
   },
   pane: {
     startAngle: 0,
