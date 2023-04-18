@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/router';
-import { api } from "@/services/axios/index";
-import { Table } from 'antd';
-import { PageTitle } from "@/components/PageTitle";
-
 import { useSelector, useDispatch } from 'react-redux';
+import { api } from "@/services/axios/index";
+import { PageTitle } from "@/components/PageTitle";
+import { TableData } from "@/components/TableData";
+
 import { Creators } from '@/store/painel/actions';
-const { Column } = Table;
 
 type Workorders = {
   assetId: number;
@@ -16,12 +14,34 @@ type Workorders = {
   title: string;
 }
 
+const columns = [
+  {
+    title: "Ativo",
+    dataIndex: "assetId",
+    key: "assetId"
+  },
+  {
+    title: "Título",
+    dataIndex: "title",
+    key: "title"
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status"
+  },
+  {
+    title: "Prioridade",
+    dataIndex: "priority",
+    key: "priority"
+  }
+];
+
 export default function Workorders() {
 
   const [workorders, setWorkorders] = useState<Workorders[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const router = useRouter();
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -42,34 +62,16 @@ export default function Workorders() {
     dispatch(Creators.loadWorkOrders());
   }, []);
 
-  // useEffect(() => {
-  //   if(workOrders) {
-  //     console.log('workOrders', workOrders);
-  //   }
-  // }, [workOrders]);
-
   return (
     <>
       <PageTitle title={"Órdens de Serviço"}/>
-        <Table
-        dataSource={workorders}
-        pagination={{ pageSize: 3 }}
-        scroll={{ x: true }}
-        loading={loading}
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: (event) => {
-              router.push(`/workorders/${record.id}`);
-              
-            },
-          };
-        }}
-        >
-          <Column title="Ativo" dataIndex="assetId" key="assetId" />
-          <Column title="Título" dataIndex="title" key="title" />
-          <Column title="Status" dataIndex="status" key="status" />
-          <Column title="Prioridade" dataIndex="priority" key="priority" />
-        </Table>
+      <TableData
+          tableColumns={columns}
+          data={workorders}
+          clicable
+          urlPath={'workorders'}
+          loading={loading}
+        />
     </>
   )
 }

@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/router';
 import { api } from "@/services/axios/index";
-import { Table } from 'antd';
 import { PageTitle } from "@/components/PageTitle";
-
-const { Column, ColumnGroup } = Table;
+import { TableData } from "@/components/TableData";
 
 type Companie = {
   id: number;
   name: string;
 };
+
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+];
+
 export default function Companies() {
 
   const [companies, setCompanies] = useState<Companie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const router = useRouter();
   
   useEffect(() => {
     async function getCompanies() {
@@ -28,22 +32,14 @@ export default function Companies() {
 
   return (
     <>
-      <PageTitle title={"Empresas"}/>
-        <Table
-        dataSource={companies}
-        pagination={{ pageSize: 3 }}
-        scroll={{ x: true }}
-        loading={loading}
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: (event) => {
-              router.push(`/companies/${record.id}`);
-            },
-          };
-        }}
-        >
-          <Column title="Nome" dataIndex="name" key="name" />
-        </Table>
+      <PageTitle title={'Empresas'}/>
+        <TableData
+          tableColumns={columns}
+          data={companies}
+          clicable
+          urlPath={'companies'}
+          loading={loading}
+        />
     </>
   )
 }
